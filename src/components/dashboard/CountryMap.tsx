@@ -267,7 +267,7 @@ const CountryMap: React.FC<CountryMapProps> = ({ mapColor }) => {
           fill: "#1A3380", // Cambia colore per la regione selezionata
         },
       }}
-      onRegionClick={(e, code) => {
+      onRegionClick={(_, code) => {
         const region = regionCoordinates[code];
 
         if (region) {

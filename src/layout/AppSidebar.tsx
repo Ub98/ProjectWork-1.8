@@ -3,9 +3,14 @@ import { Link, useLocation } from "react-router";
 
 // Assume these icons are imported from an icon library
 import {
+  AlertIcon,
+  BoxIcon,
   ChevronDownIcon,
+  DollarLineIcon,
   GridIcon,
   HorizontaLDots,
+  PieChartIcon,
+  ShootingStarIcon,
 } from "../icons";
 import { useSidebar } from "../context/SidebarContext";
 
@@ -20,7 +25,32 @@ const navItems: NavItem[] = [
   {
     icon: <GridIcon />,
     name: "Dashboard",
-    path:"/"
+    path: "/",
+  },
+  {
+    icon: <BoxIcon />,
+    name: "Produzione",
+    path: "/production",
+  },
+  {
+    icon: <DollarLineIcon />,
+    name: "Reddito",
+    path: "/income",
+  },
+  {
+    icon: <ShootingStarIcon />,
+    name: "Risorse",
+    path: "/resource",
+  },
+  {
+    icon: <PieChartIcon />,
+    name: "Sostenibilità",
+    path: "/sustainability",
+  },
+  {
+    icon: <AlertIcon />,
+    name: "Meteo",
+    path: "/weather",
   },
 ];
 
