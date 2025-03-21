@@ -31,18 +31,26 @@ const getRandomInt = (min: number, max: number): number =>
 const getRandomElement = <T>(array: readonly T[]): T =>
   array[getRandomInt(0, array.length - 1)];
 
+const getStatusBasedOnQuantity = (quantity: number): string => {
+  if (quantity === 0) return "Esaurito";  // Se la quantità è 0, stato "Esaurito"
+  if (quantity >= 50) return "Disponibile";  // Se la quantità è 50 o maggiore, stato "Disponibile"
+  return "Scorte Basse";  // Altrimenti, stato "Scorte Basse"
+};
+
 const generateResource = (id: number, lastUpdate: string): IResource => {
   const category = getRandomElement(categories);
   const name = getRandomElement(category.resources);
   const unit = getRandomElement(category.units);
+  const quantity = getRandomInt(0, 100);
+  const status = getStatusBasedOnQuantity(quantity);
 
   return {
     id,
     name,
     category: category.name,
-    quantity: getRandomInt(1, 100),
+    quantity,
     unit,
-    status: getRandomElement(statuses),
+    status,
     lastUpdate
   };
 };

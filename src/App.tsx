@@ -4,7 +4,6 @@ import { ScrollToTop } from "./components/common/ScrollToTop";
 import Dashboard from "./pages/Dashboard/Dashboard";
 import NotFound from "./pages/NotFound";
 import Production from "./pages/Production/Production";
-import Income from "./pages/Income/Income";
 import Resource from "./pages/Resource/Resource";
 import Sustainability from "./pages/Sustainability/Sustainability";
 import Weather from "./pages/Weather/Weather";
@@ -19,7 +18,6 @@ export default function App() {
           <Route element={<AppLayout />}>
             <Route index path="/" element={<Dashboard />} />
             <Route index path="/production" element={<Production />} />
-            <Route index path="/income" element={<Income />} />
             <Route index path="/resource" element={<Resource />} />
             <Route index path="/sustainability" element={<Sustainability />} />
             <Route index path="/weather" element={<Weather />} />

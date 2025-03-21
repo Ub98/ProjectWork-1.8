@@ -3,7 +3,7 @@ import MeteoLineChart from "../../components/dashboard/MeteoLineChart";
 import ProductsList from "../../components/dashboard/ProductsList";
 import ResourceCard from "../../components/dashboard/ResourceCard";
 import DemographicCard from "../../components/dashboard/DemographicCard";
-import MonthlySalesChart from "../../components/dashboard/MonthlySalesChart";
+import MonthlyProductionChart from "../../components/dashboard/MonthlyProductionChart";
 
 export default function Dashboard() {
   return (
@@ -15,7 +15,7 @@ export default function Dashboard() {
         <div className="col-span-12 space-y-6 xl:col-span-7">
           <ResourceCard />
 
-          <MonthlySalesChart />
+          <MonthlyProductionChart />
         </div>
 
         <div className="col-span-12 xl:col-span-5">

@@ -1,29 +1,49 @@
-import { addDays, format } from "date-fns";
 import { create } from "zustand";
-import { IRangeDate } from "../models/IRangeDate";
 import { ICoordinates } from "../models/ICoordinates";
-
-
+import { IProduct } from "../models/IProduct";
+import { generateProductData } from "../services/productService";
+import { IMonthlyProduction, IProduction } from "../models/IProduction";
+import { generateMonthlyProductionData, generateProductions } from "../services/productionService";
+import { IResource } from "../models/IResource";
+import { generateRandomResources } from "../services/resourceService";
+import { ISustainability } from "../models/ISustainability";
+import { generateSustainabilityDataForAll } from "../services/sustainabilityService";
 
 interface UtilsStrore {
   coordinates: ICoordinates;
   setCoordinates: (coordinates: ICoordinates) => void;
-  rangeDate: IRangeDate;
-  setRangeDate: (rangeDate: IRangeDate) => void;
   days: number;
   setDays: (days: number) => void;
+  products: IProduct[];
+  setProducts: (products: IProduct[]) => void;
+  production: IProduction[];
+  setProduction: ( production: IProduction[]) => void;
+  resources: IResource[];
+  setResources: (   resources: IResource[]) => void;
+  monthlyProduction: IMonthlyProduction[];
+  setMonthlyProduction: (monthlyProduction: IMonthlyProduction[]) => void;
+  sustainability: ISustainability[];
+  setSustainability: ( sustainability: ISustainability[]) => void;
 }
 
-const useUtilsStore = create<UtilsStrore>((set) => ({
+const productions = generateProductions(10);
+
+const useUtilsStore = create<UtilsStrore>((set, get) => ({
   coordinates: { lat: 40.8580807, lng: 14.2818627, name: "Italia" },
   setCoordinates: (coordinates) => set({ coordinates }),
-  rangeDate: {
-    from: format(new Date(), "yyyy-MM-dd"),
-    to: format(addDays(new Date(), 15), "yyyy-MM-dd"),
-  },
-  setRangeDate: (rangeDate) => set({ rangeDate }),
   days: 7,
   setDays: (days) => set({ days }),
+  products: generateProductData(),
+  setProducts: (products) => set({products}),
+  production: productions,
+  setProduction: ( production: IProduction[]) => set({production}),
+  resources: generateRandomResources(15),
+  setResources: (   resources: IResource[]) => set({resources}),
+  monthlyProduction: generateMonthlyProductionData(),
+  setMonthlyProduction: (monthlyProduction: IMonthlyProduction[]) => set({monthlyProduction}),
+  sustainability: generateSustainabilityDataForAll(productions),
+  setSustainability: (sustainability: ISustainability[]) => set({sustainability}),
+
 }));
 
 export default useUtilsStore;

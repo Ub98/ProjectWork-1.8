@@ -33,11 +33,6 @@ const navItems: NavItem[] = [
     path: "/production",
   },
   {
-    icon: <DollarLineIcon />,
-    name: "Reddito",
-    path: "/income",
-  },
-  {
     icon: <ShootingStarIcon />,
     name: "Risorse",
     path: "/resource",
