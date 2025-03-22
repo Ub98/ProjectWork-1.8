@@ -64,37 +64,34 @@ export const generateSustainabilityData = (
 };
 
 export const generateSustainabilityDataForAll = (
-  productsData: IProduction[]
+  productionData: IProduction[]
 ): ISustainability[] => {
-  return productsData.map(({ product, quantityProduced }) => {
+  return productionData.map(({ product, quantityProduced }) => {
     return generateSustainabilityData(product, quantityProduced);
   });
 };
 
 export const calculateGeneralSustainabilityPercentage = (
-  productsData: IProduction[]
+  productionData: IProduction[]
 ): number => {
-  let totalSustainabilityScore = 0;
-  let totalProducts = 0;
+  if (productionData.length === 0) return 0; // Evita divisioni per 0
 
-  // Iteriamo su tutti i prodotti
-  productsData.forEach(({ product, quantityProduced }) => {
-    const sustainabilityData = generateSustainabilityData(
-      product,
-      quantityProduced
-    ); // Ottieni i dati di sostenibilità per ogni prodotto
-    totalSustainabilityScore += sustainabilityData.sustainabilityScore; // Sommiamo il punteggio di sostenibilità
-    totalProducts++; // Contiamo i prodotti
+  let totalSustainabilityScore = 0;
+
+  productionData.forEach(({ product, quantityProduced }) => {
+    const sustainabilityData = generateSustainabilityData(product, quantityProduced);
+
+    if (sustainabilityData && sustainabilityData.sustainabilityScore !== undefined) {
+      totalSustainabilityScore += sustainabilityData.sustainabilityScore;
+    }
   });
 
-  // Calcoliamo la media dei punteggi di sostenibilità
-  const averageSustainabilityScore = totalSustainabilityScore / totalProducts;
+  const averageSustainabilityScore = totalSustainabilityScore / productionData.length;
 
-  // La percentuale di sostenibilità generale è inversamente proporzionale al punteggio (più basso è meglio)
-  const sustainabilityPercentage = Math.max(
-    0,
-    Math.min(100, averageSustainabilityScore * 100)
-  ); // Punteggio tra 0 e 100
+  // Se il punteggio più basso è meglio, dobbiamo normalizzarlo rispetto al valore massimo possibile
+  const sustainabilityPercentage = Math.max(0, Math.min(100, averageSustainabilityScore * 100));
 
   return sustainabilityPercentage;
 };
+
+

@@ -1,8 +1,11 @@
-import React from 'react'
-import ResourceList from '../../components/dashboard/ResourceList'
+import ResourceList from "../../components/dashboard/ResourceList";
+import PageBreadcrumb from "../../components/common/PageBreadCrumb";
 
 export default function Resource() {
   return (
-    <ResourceList/>
-  )
+    <>
+      <PageBreadcrumb pageTitle="Risorse" />
+      <ResourceList />
+    </>
+  );
 }

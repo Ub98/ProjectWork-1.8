@@ -5,6 +5,7 @@ import Chart from "react-apexcharts";
 import { IMeteoDaily, IMeteoHourly } from "../../models/IMeteo";
 import { ApexOptions } from "apexcharts";
 import { format } from "date-fns";
+import ChartTab from "../common/ChartTab";
 
 export default function MeteoLineChart() {
   const { days, coordinates } = useUtilsStore();
@@ -149,6 +150,9 @@ export default function MeteoLineChart() {
             Meteo
           </h3>
         </div>
+        <div className="rounded-2xl border border-gray-200 bg-white px-5 pb-5 pt-5 dark:border-gray-800 dark:bg-white/[0.03] sm:px-6 sm:pt-6 mb-6">
+        <ChartTab />
+      </div>
       </div>
 
       <div className="max-w-full overflow-x-auto custom-scrollbar">

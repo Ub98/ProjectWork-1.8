@@ -1,8 +1,6 @@
 import { IResource } from './../models/IResource';
 
-const statuses: readonly string[] = ["Disponibile", "Scorte Basse", "Esaurito"];
-
-const categories: readonly { name: string; units: string[]; resources: string[] }[] = [
+export const categories: readonly { name: string; units: string[]; resources: string[] }[] = [
   { 
     name: "Fertilizzanti", 
     units: ["kg", "sacchi"], 

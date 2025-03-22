@@ -10,6 +10,7 @@ import {
 
 import useUtilsStore from "../../stores/useUtilsStore";
 import Badge from "../ui/badge/Badge";
+import { calculateGeneralSustainabilityPercentage } from "../../services/sustainabilityService";
 
 interface Card{
     title: string
@@ -19,37 +20,57 @@ interface Card{
 }
 
 export default function ResourceCard() {
-    const days = useUtilsStore((state)=> state.days)
+    const productions = useUtilsStore((state)=> state.production)
+    const resources = useUtilsStore((state)=> state.resources)
+    const products = useUtilsStore((state)=> state.products)
+    const sustainability = useUtilsStore((state)=> state.sustainability)
     const [stats, setStats] = useState<Card[]>([]);
     
       const getRandomInt = (min: number, max: number) =>
         Math.floor(Math.random() * (max - min + 1)) + min;
+
+      const productionQuantities = () => {
+        return productions.reduce((sum, p) => sum + p.quantityProduced, 0);
+      };
+
+      const resourceQuantities = () => {
+        return resources.reduce((sum, r) => sum + r.quantity, 0);
+      };
+
+      const incomeQuantities = () => {
+        return productions.reduce((totalIncome, production) => {
+          const product = products.find(p => p.product === production.product);
+          if (product) {
+            return totalIncome + production.quantityProduced * product.pricePerUnit;
+          }
+          return totalIncome;
+        }, 0);
+      };
+
     
       const generateStats = () => {
-        const scaleFactor = days === 1 ? 0.5 : days === 7 ? 1 : 1.5; // Fattore di scala per i giorni
-    
         return [
           {
             title: "Produzione",
-            value: `${Math.floor(getRandomInt(5000, 20000) * scaleFactor)} kg`,
+            value: `${productionQuantities()} kg`,
             icon: <BoxIcon className="text-gray-800 size-6 dark:text-white/90" />,
             change: getRandomInt(-10, 15),
           },
           {
             title: "Risorse",
-            value: `${Math.floor(getRandomInt(100, 500) * scaleFactor)} unità`,
+            value: `${resourceQuantities()} unità`,
             icon: <ShootingStarIcon className="text-gray-800 size-6 dark:text-white/90" />,
             change: getRandomInt(-10, 10),
           },
           {
             title: "Reddito",
-            value: `€${Math.floor(getRandomInt(15000, 50000) * scaleFactor)}`,
+            value: `€${incomeQuantities().toFixed(2)}`,
             icon: <DollarLineIcon className="text-gray-800 size-6 dark:text-white/90" />,
             change: getRandomInt(-10, 20),
           },
           {
             title: "Sostenibilità",
-            value: `${Math.floor(getRandomInt(50, 100) * scaleFactor)}%`,
+            value: `${calculateGeneralSustainabilityPercentage(productions)}%`,
             icon: <PieChartIcon className="text-gray-800 size-6 dark:text-white/90" />,
             change: getRandomInt(-5, 10),
           },
@@ -58,17 +79,17 @@ export default function ResourceCard() {
     
       useEffect(() => {
         setStats(generateStats());
-      }, [days]);
+      }, []);
 
   return (
     <>
-      <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 md:gap-6">
+      <div className="flex flex-wrap gap-6">
         {stats.map((stat, index) => {
           const isPositive = stat.change >= 0;
           return (
             <div
               key={index}
-              className="rounded-2xl border border-gray-200 bg-white p-5 dark:border-gray-800 dark:bg-white/[0.03] md:p-6"
+              className="rounded-2xl border border-gray-200 bg-white p-5 dark:border-gray-800 dark:bg-white/[0.03] md:p-6 flex-1"
             >
               <div className="flex items-center justify-center w-12 h-12 bg-gray-100 rounded-xl dark:bg-gray-800">
                 {stat.icon}
