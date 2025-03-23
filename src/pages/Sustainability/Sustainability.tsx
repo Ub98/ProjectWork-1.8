@@ -1,4 +1,3 @@
-import React from "react";
 import SustainabilityList from "../../components/dashboard/SustainabilityList";
 import PageBreadcrumb from "../../components/common/PageBreadCrumb";
 

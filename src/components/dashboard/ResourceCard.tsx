@@ -23,7 +23,6 @@ export default function ResourceCard() {
     const productions = useUtilsStore((state)=> state.production)
     const resources = useUtilsStore((state)=> state.resources)
     const products = useUtilsStore((state)=> state.products)
-    const sustainability = useUtilsStore((state)=> state.sustainability)
     const [stats, setStats] = useState<Card[]>([]);
     
       const getRandomInt = (min: number, max: number) =>

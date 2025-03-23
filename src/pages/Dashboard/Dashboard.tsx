@@ -1,4 +1,3 @@
-import ChartTab from "../../components/common/ChartTab";
 import MeteoLineChart from "../../components/dashboard/MeteoLineChart";
 import ProductsList from "../../components/dashboard/ProductsList";
 import ResourceCard from "../../components/dashboard/ResourceCard";

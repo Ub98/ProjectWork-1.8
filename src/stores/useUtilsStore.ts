@@ -28,7 +28,7 @@ interface UtilsStrore {
 
 const productions = generateProductions(10);
 
-const useUtilsStore = create<UtilsStrore>((set, get) => ({
+const useUtilsStore = create<UtilsStrore>((set) => ({
   coordinates: { lat: 40.8580807, lng: 14.2818627, name: "Italia" },
   setCoordinates: (coordinates) => set({ coordinates }),
   days: 7,
