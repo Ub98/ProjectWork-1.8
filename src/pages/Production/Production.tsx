@@ -20,13 +20,11 @@ export default function Production() {
         </Button>
       </div>
 
-      <div className="flex flex-col md:flex-row gap-6">
-        <div className="w-full md:w-7/12">
-          <ProductionList />
-        </div>
-        <div className="w-full md:w-5/12">
-          <ProductsList />
-        </div>
+      <div className="w-full">
+        <ProductionList />
+      </div>
+      <div className="w-full mt-4">
+        <ProductsList />
       </div>
 
       <ModalFormProduction />

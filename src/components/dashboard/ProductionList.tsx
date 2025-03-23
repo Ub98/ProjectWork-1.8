@@ -7,9 +7,21 @@ import {
 } from "../ui/table";
 import useUtilsStore from "../../stores/useUtilsStore";
 import { format } from "date-fns";
+import { IProduction } from "../../models/IProduction";
 
 export default function ProductionList() {
   const productions = useUtilsStore((state) => state.production);
+  const products = useUtilsStore((state)=> state.products)
+
+  const getIncome = (production: IProduction) =>{
+
+    let productPrice = products.find((p)=> p.product === production.product)
+    if (productPrice) {
+      return (production.quantityProduced * productPrice.pricePerUnit).toFixed(2)
+    }
+
+    
+  }
 
   return (
     <div className="overflow-hidden rounded-2xl border border-gray-200 bg-white px-4 pb-3 pt-4 dark:border-gray-800 dark:bg-white/[0.03] sm:px-6">
@@ -47,6 +59,12 @@ export default function ProductionList() {
                 isHeader
                 className="py-3 font-medium text-gray-500 text-start text-theme-xs dark:text-gray-400"
               >
+                Guadagno
+              </TableCell>
+              <TableCell
+                isHeader
+                className="py-3 font-medium text-gray-500 text-start text-theme-xs dark:text-gray-400"
+              >
                 Data
               </TableCell>
             </TableRow>
@@ -75,6 +93,9 @@ export default function ProductionList() {
                       {r.resource} ({r.quantity} {r.unit})
                     </div>
                   ))}
+                </TableCell>
+                <TableCell className="py-3 text-gray-500 text-theme-sm dark:text-gray-400">
+                  {`€ ${getIncome(production)}`}
                 </TableCell>
                 <TableCell className="py-3 text-gray-500 text-theme-sm dark:text-gray-400">
                   {format(production.productionDate, "dd/mm/yyyy")}

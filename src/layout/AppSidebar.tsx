@@ -3,7 +3,7 @@ import { Link, useLocation } from "react-router";
 
 // Assume these icons are imported from an icon library
 import {
-  AlertIcon,
+  BoltIcon,
   BoxIcon,
   ChevronDownIcon,
   GridIcon,
@@ -42,7 +42,7 @@ const navItems: NavItem[] = [
     path: "/sustainability",
   },
   {
-    icon: <AlertIcon />,
+    icon: <BoltIcon />,
     name: "Meteo",
     path: "/weather",
   },
@@ -264,14 +264,14 @@ const AppSidebar: React.FC = () => {
             <>
               <img
                 className="dark:hidden"
-                src="/images/logo/logo.svg"
+                src="/images/logo/logo-icon.svg"
                 alt="Logo"
                 width={150}
                 height={40}
               />
               <img
                 className="hidden dark:block"
-                src="/images/logo/logo-dark.svg"
+                src="/images/logo/logo.svg"
                 alt="Logo"
                 width={150}
                 height={40}
@@ -279,7 +279,7 @@ const AppSidebar: React.FC = () => {
             </>
           ) : (
             <img
-              src="/images/logo/logo-icon.svg"
+              src="/images/logo/logo.svg"
               alt="Logo"
               width={32}
               height={32}
