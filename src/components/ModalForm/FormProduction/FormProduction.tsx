@@ -98,7 +98,7 @@ const FormProduction: React.FC<IForm> = ({control, errors, watch}) => {
                 label: c.name,
                 value: c.name,
               }))}
-              placeholder="Seleziona l'unità di misura"
+              placeholder="Seleziona la risorsa"
               control={control}
               error={!!errors?.resourcesUsed?.[0]?.resource}
               hint={errors?.resourcesUsed?.[0]?.resource?.message as string}
